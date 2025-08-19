@@ -17,8 +17,8 @@ def init_game():
     if screen is None:
         screen = turtle.Screen()
         screen.setup(width=800, height=600)
-        screen.bgcolor("white")
-        screen.title("Hangman")
+        screen.bgcolor('white')
+        screen.title('Hangman')
     
     # Clear the screen
     screen.clear()
@@ -29,7 +29,7 @@ def init_game():
     drawer.pensize(3)
     
     # Draw the gallows
-    drawer.pencolor("black")
+    drawer.pencolor('black')
     drawer.penup()
     drawer.goto(200, -150)
     drawer.pendown()
@@ -51,8 +51,9 @@ def add_miss():
     if drawer is None:
         return
     
+    drawer.setheading(270)
     drawer.pensize(2)
-    drawer.pencolor("red")
+    drawer.pencolor('red')
     
     # Draw body parts in order: head, body, left arm, right arm, left leg, right leg
     if miss_count == 0:  # Head
@@ -101,14 +102,27 @@ def set_word(word_display: str):
     if drawer is None:
         return
     
+    # Clear previous word by drawing a white rectangle
+    drawer.fillcolor('white')
+    drawer.penup()
+    drawer.goto(-350, -80)
+    drawer.begin_fill()
+    drawer.setheading(0)
+    for _ in range(2):
+        drawer.forward(400)
+        drawer.left(90)
+        drawer.forward(100)
+        drawer.left(90)
+    drawer.end_fill()
+    
     # Add spacing between letters for better readability
-    spaced_display = " ".join(word_display)
+    spaced_display = ' '.join(word_display)
     
     # Write the new word
-    drawer.pencolor("black")
+    drawer.pencolor('black')
     drawer.penup()
     drawer.goto(-200, -50)
-    drawer.write(spaced_display, align="center", font=("Arial", 32, "normal"))
+    drawer.write(spaced_display, align='center', font=('Arial', 32, 'normal'))
 
 
 def set_guesses(guesses_display: str):
@@ -118,8 +132,21 @@ def set_guesses(guesses_display: str):
     if drawer is None:
         return
     
+    # Clear previous guesses by drawing a white rectangle
+    drawer.fillcolor('white')
+    drawer.penup()
+    drawer.goto(-380, 200)
+    drawer.begin_fill()
+    drawer.setheading(0)
+    for _ in range(2):
+        drawer.forward(400)
+        drawer.left(90)
+        drawer.forward(40)
+        drawer.left(90)
+    drawer.end_fill()
+    
     # Write the guesses
-    drawer.pencolor("black")
+    drawer.pencolor('black')
     drawer.penup()
     drawer.goto(-350, 220)
-    drawer.write(f"Guesses: {guesses_display}", align="left", font=("Arial", 16, "normal"))
+    drawer.write(f'Guesses: {guesses_display}', align='left', font=('Arial', 16, 'normal'))
